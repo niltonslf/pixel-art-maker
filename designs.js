@@ -6,7 +6,8 @@
 var button = document.querySelector("input[type=submit]"),
   myCanvas = document.querySelector("#pixel_canvas"),
   colorPicker = document.querySelector("#colorPicker"),
-  colorSelected;
+  colorSelected = "#000000",
+  tdArray;
 
 
 colorPicker.addEventListener('change', function () {
@@ -21,6 +22,14 @@ colorPicker.addEventListener('change', function () {
 button.addEventListener('click', function (event) {
   event.preventDefault();
   makeGrid();
+  // preserve all td's at variable tdArray
+  tdArray = document.querySelectorAll('td');
+  // add a listener for each td
+  tdArray.forEach(element => {
+    element.addEventListener('click',function(event){
+      event.target.style.background = colorSelected;
+    });
+  });
 });
 
 
@@ -56,6 +65,4 @@ function makeGrid() {
 
 }
 
-myCanvas.addEventListener('click',function(event){
-  event.target.style.background = colorSelected;
-})
+
